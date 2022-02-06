@@ -1,0 +1,54 @@
+
+query: DOAGE
+target: no
+signal: Okay, be that way.
+target: 1
+signal: Oh, so you're just a teenager then.
+target: old
+signal: You're really quite young you know.
+
+query: MUITV
+target: yes
+signal: Me too. I like to watch cartoons.
+target: no
+signal: If you dont watch TV, what do you do with your spare time?
+
+query: BUPTO
+target: nothing
+signal: Oh, so you're bored then & thought you'd come talk to me. How nice :)
+target: not too much
+signal: What could we get into then?
+target: watching
+signal: So do you watch TV all the time?
+
+query: READY
+target: no
+signal: I can't wait for Christmas!
+target: yes
+signal: Oh, so you can just sit back and take it easy eh?
+target: dont
+signal: It will be here before you know it!
+
+query: SANTA
+target: no
+signal: You can visit the mailroom later if you'd like to send Santa a letter.
+target: yes
+signal: Oh good.
+
+query: BREAK
+target: nothing
+signal: You must be hungry then.
+target: eggs
+signal: That's a very traditional breakfast there.
+target: cereal
+signal: I like honey nut cheerios.
+target: grits
+signal: Ah, you're from the south then.
+
+query: ENDOF
+target: whatever
+signal: grand finale
+
+
+
+
