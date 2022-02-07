@@ -10,3 +10,7 @@
 .submitButton {
     visibility: hidden;
 }
+
+.lastMessage {
+    margin-bottom: 5px;
+}

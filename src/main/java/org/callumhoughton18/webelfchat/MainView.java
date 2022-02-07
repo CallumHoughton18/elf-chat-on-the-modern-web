@@ -10,9 +10,10 @@ import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
-import org.callumhoughton18.webelfchat.controls.AddableMessageList;
+import org.callumhoughton18.webelfchat.components.AddableMessageList;
+import org.callumhoughton18.webelfchat.components.AudioPlayer;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+
 import javax.annotation.PostConstruct;
 
 @Route("")
@@ -32,10 +33,14 @@ public class MainView extends VerticalLayout {
     @Value("${base_elf_emotion_images_url}")
     private String baseElfEmotionImagesUrl;
 
+    @Value("${refresh_sound_url}")
+    private String refreshSoundUrl;
+
     AddableMessageList responses;
     Button addButton;
     TextField userResponseField;
     Image bifEmotion;
+    AudioPlayer player;
     WebElf bif;
 
     public MainView() {
@@ -44,6 +49,7 @@ public class MainView extends VerticalLayout {
         responses = new AddableMessageList();
         responses.addClassName("chat");
 
+        player = new AudioPlayer();
         userResponseField = new TextField();
         addButton = new Button("Add");
         bifEmotion = new Image();
@@ -58,6 +64,7 @@ public class MainView extends VerticalLayout {
         messageScroller.setSizeFull();
         add(
                 heading,
+                player,
                 bifEmotion,
                 messageScroller,
                 inputFields
@@ -69,6 +76,7 @@ public class MainView extends VerticalLayout {
         bif = new WebElf(bifTextUrl, elfScheduleUrl);
         bif.initializeBot();
 
+        player.setSource(refreshSoundUrl);
         bifEmotion.setAlt("Bifs Emotion Image");
         bifEmotion.setSrc(String.format("files/happy_bif.jpg", baseElfEmotionImagesUrl));
 
@@ -79,9 +87,10 @@ public class MainView extends VerticalLayout {
                 String emotionUrl = WebElfUtils.EmotionShorthandToLonghand(bifResponse.getEmotion());
                 String fileUrl = String.format("files/%s_bif.jpg", emotionUrl);
                 bifEmotion.setSrc(fileUrl);
+                player.play();
             }
             responses.addMessage("You", userResponse);
-            responses.addMessage("Bif", bifResponse.getResponse());
+            responses.addMessage("Bif", bifResponse.getResponse(), "lastMessage");
             userResponseField.setValue("");
         });
     }
