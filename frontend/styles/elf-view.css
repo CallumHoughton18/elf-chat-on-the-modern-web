@@ -1,0 +1,12 @@
+.heading {
+    font-family: 'PixelatedTimesBigAndbold', fantasy;
+    text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+}
+
+.chat {
+    font-family: 'PixelatedTimes', serif;
+}
+
+.submitButton {
+    visibility: hidden;
+}

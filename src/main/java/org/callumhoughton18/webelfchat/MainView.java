@@ -3,11 +3,8 @@ package org.callumhoughton18.webelfchat;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.messages.MessageList;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -19,8 +16,9 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 @Route("")
-@CssImport("./styles/shared-styles.css")
-@Component
+@CssImport(value = "./styles/fonts.css")
+@CssImport(value = "./styles/elf-view.css")
+@CssImport(value="./styles/text-field-style.css", themeFor="vaadin-text-field" )
 public class MainView extends VerticalLayout {
 
     // Need to init bot when the server has loaded, as currently the schedule and bot text
@@ -42,19 +40,24 @@ public class MainView extends VerticalLayout {
 
     public MainView() {
         setSizeFull();
+        addClassName("elf-view");
         responses = new AddableMessageList();
+        responses.addClassName("chat");
 
         userResponseField = new TextField();
         addButton = new Button("Add");
         bifEmotion = new Image();
+        H1 heading = new H1("Bif on the Modern Web");
+        heading.addClassName("heading");
         bifEmotion.setHeight("300px");
 
+        addButton.addClassName("submitButton");
         addButton.addClickShortcut(Key.ENTER);
         HorizontalLayout inputFields = new HorizontalLayout(userResponseField, addButton);
         Scroller messageScroller = new Scroller(responses);
         messageScroller.setSizeFull();
         add(
-                new H1("Bif on the Modern Web"),
+                heading,
                 bifEmotion,
                 messageScroller,
                 inputFields

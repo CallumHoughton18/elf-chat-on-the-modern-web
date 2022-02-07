@@ -1353,6 +1353,14 @@ action:	A154
 	priority: 9
 	Good night!
 
+regex:	Q155
+	invokes: A155
+	what do you think of matty leyland?
+	matty leyland
+
+action:	A155
+	priority: 9
+	He's a big spudhead, worst team mate for Trials of Osiris (I am a Destiny 2 PVP main)
 
 ###Begin Elf Chat Module #3 #####
 

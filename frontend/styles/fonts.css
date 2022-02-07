@@ -1,0 +1,27 @@
+@font-face {
+    font-family: "PixelatedTimes";
+    src: url("/fonts/TIMES.TTF-16-Regular.woff") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "PixelatedTimesBigAndbold";
+    src: url("/fonts/TIMESBD.TTF-32-Bold.woff") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "PixelatedTimes";
+    src: url("/fonts/TIMESBD.TTF-16-Bold.woff") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "PixelatedTimes";
+    src: url("/fonts/TIMESBD.TTF-16-Italic.woff") format("truetype");
+    font-weight: normal;
+    font-style: italic;
+}

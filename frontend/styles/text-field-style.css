@@ -1,0 +1,12 @@
+[part~="input-field"] {
+    border-bottom: 2px solid #f4f4f4;
+    border-right: 2px solid #f4f4f4;
+    border-left: 2px solid #848484;
+    border-top: 2px solid #848484;
+    background-color: blue;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    color: yellow;
+    font-family: 'PixelatedTimes', fantasy;
+}
