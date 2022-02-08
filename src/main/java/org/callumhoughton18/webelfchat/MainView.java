@@ -44,6 +44,7 @@ public class MainView extends VerticalLayout {
     WebElf bif;
 
     public MainView() {
+
         setSizeFull();
         addClassName("elf-view");
         responses = new AddableMessageList();
@@ -69,6 +70,12 @@ public class MainView extends VerticalLayout {
                 messageScroller,
                 inputFields
         );
+        setJustifyContentMode(JustifyContentMode.CENTER);
+        setAlignItems(Alignment.CENTER);
+        expand(inputFields);
+        inputFields.setWidth("100%");
+        inputFields.expand();
+        userResponseField.setWidthFull();
     }
 
     @PostConstruct
