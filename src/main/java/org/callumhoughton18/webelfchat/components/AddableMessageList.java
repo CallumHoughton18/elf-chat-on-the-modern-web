@@ -6,7 +6,7 @@ import com.vaadin.flow.component.html.Div;
 public class AddableMessageList extends Div {
 
     public void addMessage(String from, String text, String className) {
-        Div line = new Div(new Text(from + ": " + text));
+        Div line = new Div(new Text(from), new Text(": " + text));
         if (className != null) line.addClassName(className);
         line.getElement().callJsFunction("scrollIntoView");
         add(line);

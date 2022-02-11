@@ -40,6 +40,8 @@ public class MainView extends VerticalLayout {
     Button addButton;
     TextField userResponseField;
     Image bifEmotion;
+    Image snowFlake1;
+    Image snowFlake2;
     AudioPlayer player;
     WebElf bif;
 
@@ -52,19 +54,26 @@ public class MainView extends VerticalLayout {
 
         player = new AudioPlayer();
         userResponseField = new TextField();
-        addButton = new Button("Add");
+        addButton = new Button("Send!");
         bifEmotion = new Image();
+        snowFlake1 = new Image();
+        snowFlake1.addClassName("snowflake");
+        snowFlake2 = new Image();
+        snowFlake2.addClassName("snowflake");
         H1 heading = new H1("Bif on the Modern Web");
+        HorizontalLayout header = new HorizontalLayout(snowFlake1, heading, snowFlake2);
+        header.setAlignItems(Alignment.CENTER);
         heading.addClassName("heading");
-        bifEmotion.setHeight("300px");
+        bifEmotion.addClassName("elfEmotion");
 
         addButton.addClassName("submitButton");
         addButton.addClickShortcut(Key.ENTER);
         HorizontalLayout inputFields = new HorizontalLayout(userResponseField, addButton);
+        inputFields.setAlignItems(Alignment.CENTER);
         Scroller messageScroller = new Scroller(responses);
         messageScroller.setSizeFull();
         add(
-                heading,
+                header,
                 player,
                 bifEmotion,
                 messageScroller,
@@ -86,6 +95,8 @@ public class MainView extends VerticalLayout {
         player.setSource(refreshSoundUrl);
         bifEmotion.setAlt("Bifs Emotion Image");
         bifEmotion.setSrc(String.format("files/happy_bif.jpg", baseElfEmotionImagesUrl));
+        snowFlake1.setSrc("files/snowflake.gif");
+        snowFlake2.setSrc("files/snowflake.gif");
 
         addButton.addClickListener(click -> {
             String userResponse = userResponseField.getValue();
@@ -100,5 +111,10 @@ public class MainView extends VerticalLayout {
             responses.addMessage("Bif", bifResponse.getResponse(), "lastMessage");
             userResponseField.setValue("");
         });
+
+        responses.addMessage("Bif", "Hello? Who's there? (Type your messages in the blue space below " +
+                "and press Enter, or click the Send! button, to send them to me.)", "lastMessage");
+
+        userResponseField.focus();
     }
 }
