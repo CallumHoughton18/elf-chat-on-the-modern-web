@@ -34,7 +34,7 @@ steps:
   inputs:
     containerregistrytype: 'Container Registry'
     dockerRegistryEndpoint: 'Personal DockerHub'
-    dockerComposeFile: '**/docker-compose.yml'
+    dockerComposeFile: '**/docker-compose.yaml'
     action: 'Build services'
     additionalImageTags: '$(Build.BuildId)'
     includeLatestTag: true
@@ -43,7 +43,7 @@ steps:
   inputs:
     containerregistrytype: 'Container Registry'
     dockerRegistryEndpoint: 'Personal DockerHub'
-    dockerComposeFile: '**/docker-compose.yml'
+    dockerComposeFile: '**/docker-compose.yaml'
     action: 'Push services'
     qualifyImageNames: true
     additionalImageTags: '$(Build.BuildId)'
