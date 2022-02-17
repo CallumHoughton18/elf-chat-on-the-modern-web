@@ -1,0 +1,51 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    goals: 'install -P production'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publishing build artifacts'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'web-elf-chat'
+    publishLocation: 'Container'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Personal DockerHub'
+    command: 'login'
+- task: DockerCompose@0
+  displayName: 'Building web elf via Docker-Compose...'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerRegistryEndpoint: 'Personal DockerHub'
+    dockerComposeFile: '**/docker-compose.yml'
+    action: 'Build services'
+    additionalImageTags: '$(Build.BuildId)'
+    includeLatestTag: true
+- task: DockerCompose@0
+  displayName: 'Pushing web elf app via Docker-Compose...'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerRegistryEndpoint: 'Personal DockerHub'
+    dockerComposeFile: '**/docker-compose.yml'
+    action: 'Push services'
+    qualifyImageNames: true
+    additionalImageTags: '$(Build.BuildId)'
+    includeLatestTag: true
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
