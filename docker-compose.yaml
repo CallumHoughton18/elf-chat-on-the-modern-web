@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   webelfchat:
-    image: webelfchat
+    image: callumhoughton22/webelfchat
     restart: unless-stopped
     build:
       context: .
