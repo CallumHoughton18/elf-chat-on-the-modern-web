@@ -3,7 +3,6 @@ version: '3.4'
 services:
   webelfchat:
     image: webelfchat
-    restart: unless-stopped
     build:
       context: .
       dockerfile: Dockerfile
