@@ -15,6 +15,7 @@ import org.callumhoughton18.webelfchat.components.AudioPlayer;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.PostConstruct;
+import java.net.URL;
 
 @Route("")
 @CssImport(value = "./styles/fonts.css")
@@ -25,13 +26,13 @@ public class MainView extends VerticalLayout {
     // Need to init bot when the server has loaded, as currently the schedule and bot text
     // isn't loaded and available before the MainView init method is called.
     @Value("${bif_text_url}")
-    private String bifTextUrl;
+    private String bifTextPath;
 
     @Value("${elf_schedule_url}")
-    private String elfScheduleUrl;
+    private String elfSchedulePath;
 
     @Value("${base_elf_emotion_images_url}")
-    private String baseElfEmotionImagesUrl;
+    private String baseElfEmotionImagesPath;
 
     @Value("${refresh_sound_url}")
     private String refreshSoundUrl;
@@ -89,12 +90,17 @@ public class MainView extends VerticalLayout {
 
     @PostConstruct
     public void init() {
-        bif = new WebElf(bifTextUrl, elfScheduleUrl);
+
+        URL bifTextPathFormatted = this.getClass().getClassLoader().getResource(bifTextPath);
+        URL bifScheduleFormatted = this.getClass().getClassLoader().getResource(elfSchedulePath);
+        URL emotionsPathFormatted = this.getClass().getClassLoader().getResource(baseElfEmotionImagesPath);
+
+        bif = new WebElf(bifTextPathFormatted, bifScheduleFormatted);
         bif.initializeBot();
 
         player.setSource(refreshSoundUrl);
         bifEmotion.setAlt("Bifs Emotion Image");
-        bifEmotion.setSrc(String.format("files/happy_bif.jpg", baseElfEmotionImagesUrl));
+        bifEmotion.setSrc(String.format("files/happy_bif.jpg", emotionsPathFormatted));
         snowFlake1.setSrc("files/snowflake.gif");
         snowFlake2.setSrc("files/snowflake.gif");
 

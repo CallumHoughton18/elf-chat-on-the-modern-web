@@ -2,16 +2,18 @@ package org.callumhoughton18.webelfchat;
 
 import org.robitron.elfchat.*;
 
+import java.net.URL;
+
 public class WebElf {
     private Grammar grammar;
     private QuestSet questSet;
     private Fred baseChatBot;
     private Context context;
-    private String scheduleUrl;
-    private String questionsUrl;
+    private URL scheduleUrl;
+    private URL questionsUrl;
     private String currentMind;
 
-    public WebElf(String questSetUrl, String botScheduleUrl){
+    public WebElf(URL questSetUrl, URL botScheduleUrl){
         scheduleUrl = botScheduleUrl;
         questionsUrl = questSetUrl;
     }

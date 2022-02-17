@@ -10,105 +10,66 @@ import java.util.Vector;
 // Referenced classes of package com.robitron.phred:
 //            Quest
 
-public class QuestSet
-{
+public class QuestSet {
 
-    public QuestSet()
-    {
+    public QuestSet() {
         imp = new Vector(1000);
     }
 
-    public boolean loadStream(InputStream s)
-    {
-        try
-        {
+    public boolean loadStream(InputStream s) {
+        try {
             Quest quest = null;
             DataInputStream datainputstream = new DataInputStream(s);
             String s1;
-            while((s1 = datainputstream.readLine()) != null)
-                if(s1.startsWith("query:"))
-                {
+            while ((s1 = datainputstream.readLine()) != null)
+                if (s1.startsWith("query:")) {
                     String s2 = s1.substring(6);
                     quest = new Quest();
                     quest.addName(s2.trim());
                     imp.addElement(quest);
-                } else
-                if(s1.startsWith("target:"))
+                } else if (s1.startsWith("target:"))
                     quest.addQuery(s1.substring(7).trim());
-                else
-                if(s1.startsWith("signal:"))
+                else if (s1.startsWith("signal:"))
                     quest.addSignal(s1.substring(7).trim());
             System.out.println(imp.size() + " Quests Loaded.");
             datainputstream.close();
             return true;
-        }
-        catch(IOException ioexception)
-        {
+        } catch (IOException ioexception) {
             ioexception.printStackTrace();
         }
         return false;
     }
 
-    public boolean loadFile(String s)
-    {
-        try
-        {
+    public boolean loadFile(URL url) {
+        try {
             Quest quest = null;
-            DataInputStream datainputstream = null;
-            if(s.startsWith("http:"))
-            {
-                URL url = null;
-                try
-                {
-                    url = new URL(s);
-                }
-                catch(ArrayIndexOutOfBoundsException _ex)
-                {
-                    System.err.println("wrong usage:");
-                }
-                catch(Exception exception)
-                {
-                    System.err.println(exception.toString());
-                }
-                datainputstream = new DataInputStream(url.openStream());
-            } else
-            {
-                File file = new File(s);
-                datainputstream = new DataInputStream(new FileInputStream(file));
-            }
+            DataInputStream datainputstream = new DataInputStream(url.openStream());
+
             String s1;
-            while((s1 = datainputstream.readLine()) != null) 
-                if(s1.startsWith("query:"))
-                {
+            while ((s1 = datainputstream.readLine()) != null)
+                if (s1.startsWith("query:")) {
                     String s2 = s1.substring(6);
                     quest = new Quest();
                     quest.addName(s2.trim());
                     imp.addElement(quest);
-                } else
-                if(s1.startsWith("target:"))
+                } else if (s1.startsWith("target:"))
                     quest.addQuery(s1.substring(7).trim());
-                else
-                if(s1.startsWith("signal:"))
+                else if (s1.startsWith("signal:"))
                     quest.addSignal(s1.substring(7).trim());
             System.out.println(imp.size() + " Quests Loaded.");
             datainputstream.close();
             return true;
-        }
-        catch(IOException ioexception)
-        {
+        } catch (IOException ioexception) {
             ioexception.printStackTrace();
         }
         return false;
     }
 
-    public void DumpLog()
-    {
+    public void DumpLog() {
         Object obj = null;
-        for(int i = 0; i < imp.size(); i++)
-        {
-            Quest quest = (Quest)imp.elementAt(i);
-            for(int j = 0; j < quest.query.size(); j++)
-            {
+        for (int i = 0; i < imp.size(); i++) {
+            Quest quest = (Quest) imp.elementAt(i);
+            for (int j = 0; j < quest.query.size(); j++) {
                 System.out.println(quest.query.elementAt(j));
                 System.out.println(quest.signal.elementAt(j));
             }
@@ -117,15 +78,13 @@ public class QuestSet
 
     }
 
-    public Quest findQuest(String s)
-    {
+    public Quest findQuest(String s) {
         boolean flag = false;
         Quest quest = null;
-        for(int i = 0; i < imp.size() && !flag; i++)
-        {
-            quest = (Quest)imp.elementAt(i);
-            for(int j = 1; j < quest.width && !flag; j++)
-                if(quest.name.equalsIgnoreCase(s))
+        for (int i = 0; i < imp.size() && !flag; i++) {
+            quest = (Quest) imp.elementAt(i);
+            for (int j = 1; j < quest.width && !flag; j++)
+                if (quest.name.equalsIgnoreCase(s))
                     flag = true;
 
         }
