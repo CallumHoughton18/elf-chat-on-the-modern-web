@@ -104,19 +104,19 @@ public class MainView extends VerticalLayout {
         snowFlake1.setSrc("files/snowflake.gif");
         snowFlake2.setSrc("files/snowflake.gif");
 
-        addButton.addClickListener(click -> {
-            String userResponse = userResponseField.getValue();
-            WebElfResponse bifResponse = bif.submitMessage(userResponse);
-            if (bifResponse.getEmotion() != null) {
-                String emotionUrl = WebElfUtils.EmotionShorthandToLonghand(bifResponse.getEmotion());
-                String fileUrl = String.format("files/%s_bif.jpg", emotionUrl);
-                bifEmotion.setSrc(fileUrl);
-                player.play();
-            }
-            responses.addMessage("You", userResponse);
-            responses.addMessage("Bif", bifResponse.getResponse(), "lastMessage");
-            userResponseField.setValue("");
-        });
+//        addButton.addClickListener(click -> {
+//            String userResponse = userResponseField.getValue();
+//            WebElfResponse bifResponse = bif.submitMessage(userResponse);
+//            if (bifResponse.getEmotion() != null) {
+//                String emotionUrl = WebElfUtils.EmotionShorthandToLonghand(bifResponse.getEmotion());
+//                String fileUrl = String.format("files/%s_bif.jpg", emotionUrl);
+//                bifEmotion.setSrc(fileUrl);
+//                player.play();
+//            }
+//            responses.addMessage("You", userResponse);
+//            responses.addMessage("Bif", bifResponse.getResponse(), "lastMessage");
+//            userResponseField.setValue("");
+//        });
 
         responses.addMessage("Bif", "Hello? Who's there? (Type your messages in the blue space below " +
                 "and press Enter, or click the Send! button, to send them to me.)", "lastMessage");

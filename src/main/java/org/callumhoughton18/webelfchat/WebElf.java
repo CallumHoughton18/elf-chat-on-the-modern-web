@@ -19,16 +19,15 @@ public class WebElf {
     }
 
     public void initializeBot() {
-        grammar = new Grammar();
-        questSet = new QuestSet();
-        baseChatBot = new Fred(grammar, true, questionsUrl);
-        context = new Context(baseChatBot);
-        baseChatBot.setVerbose(false);
-        questSet.loadFile(scheduleUrl);
+//        grammar = new Grammar();
+//        questSet = new QuestSet();
+//        baseChatBot = new Fred(grammar, true, questionsUrl);
+//        context = new Context(baseChatBot);
+//        baseChatBot.setVerbose(false);
+//        questSet.loadFile(scheduleUrl);
     }
 
     public WebElfResponse submitMessage(String message) {
-
         // First, try mapping user response to what FRED expects based on previous messages MIND
         if (currentMind != null) {
             String mindBasedMapResponse = tryAndMatchMessageToExpectedMindResponse(message);
@@ -68,17 +67,6 @@ public class WebElf {
         }
         return input;
     }
-
-//    private WebElfResponse parseResponse(String response) {
-//        String responseText = response;
-//
-//        Integer emotionNum = null;
-//        if (response.startsWith("@")){
-//            emotionNum = Integer.parseInt(response.substring(0, 2));
-//            responseText = response.substring(2);
-//        }
-//        return new WebElfResponse(responseText, emotionNum);
-//    }
 
     // 6 = HappyBif
     // 1 = ShockedBif
