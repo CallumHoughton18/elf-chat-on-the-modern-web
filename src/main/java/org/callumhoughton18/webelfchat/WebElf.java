@@ -19,15 +19,16 @@ public class WebElf {
     }
 
     public void initializeBot() {
-//        grammar = new Grammar();
-//        questSet = new QuestSet();
-//        baseChatBot = new Fred(grammar, true, questionsUrl);
-//        context = new Context(baseChatBot);
-//        baseChatBot.setVerbose(false);
-//        questSet.loadFile(scheduleUrl);
+        grammar = new Grammar();
+        questSet = new QuestSet();
+        baseChatBot = new Fred(grammar, true, questionsUrl);
+        context = new Context(baseChatBot);
+        baseChatBot.setVerbose(false);
+        questSet.loadFile(scheduleUrl);
     }
 
     public WebElfResponse submitMessage(String message) {
+
         // First, try mapping user response to what FRED expects based on previous messages MIND
         if (currentMind != null) {
             String mindBasedMapResponse = tryAndMatchMessageToExpectedMindResponse(message);
