@@ -1353,6 +1353,13 @@ action:	A154
 	priority: 9
 	Good night!
 
+regex:	Q155
+	invokes: A155
+	Who is Callum Houghton?
+
+action:	A155
+	priority: 9
+	He revived me and ported me to the modern web!
 
 ###Begin Elf Chat Module #3 #####
 
